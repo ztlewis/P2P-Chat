@@ -40,10 +40,10 @@ public class UDPPacketManager implements CommManager {
 	 * @param port Port number desired.
 	 * @throws IOException
 	 */
-	public void initSocket(String address, String port) throws IOException
+	public void initSocket(String address, int port) throws IOException
 	{
 		//Case where address and port is specified via arguments.
-		socket = new DatagramSocket(Integer.parseInt(port), 
+		socket = new DatagramSocket(port, 
 				InetAddress.getByName(address));
 	}
 	

@@ -71,7 +71,7 @@ public class ServerConsole {
 		System.out.print("Please enter presentation server port: ");
 		presPort = scan.nextLine();
 		scan.close();
-		network.setPresDetails(presAddress, presPort);
+		network.setPresDetails(presAddress, Integer.parseInt(presPort));
 	}
 	
 	/**

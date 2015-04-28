@@ -7,7 +7,7 @@ import java.util.List;
 public interface CommManager {
 	
 	public void initSocket() throws IOException;
-	public void initSocket(String address, String port) throws IOException;
+	public void initSocket(String address, int port) throws IOException;
 	public String getServerAddress() throws UnknownHostException;
 	public int getServerPort();
 	public List<String> receivePacket() throws IOException, ClassNotFoundException;
