@@ -192,7 +192,7 @@ public class ServerLogin {
 				view.initComm(comm);
 				if(detailsCheckBox.isSelected())
 				{
-					network.initSocket(servAddress.getText(), servPort.getText());
+					network.initSocket(servAddress.getText(), serverPort);
 				}
 				else
 				{
@@ -200,7 +200,7 @@ public class ServerLogin {
 				}
 				if(presCheckBox.isSelected())
 				{
-					network.setPresDetails(presAddress.getText(), presPort.getText());
+					network.setPresDetails(presAddress.getText(), presentationPort);
 				}
 				view.initialise();
 				new Thread(network).start();

@@ -30,7 +30,7 @@ public class ServerNetwork extends Thread{
 	private String serverAddress;
 	private int serverPort;
 	private String presAddress;
-	private String presPort;
+	private int presPort;
 	private boolean isRunning = false;
 	private String method = "UDP";
 	private String encryption = "N/A";
@@ -69,7 +69,7 @@ public class ServerNetwork extends Thread{
 	 * @param address The String representation of the requested IP address.
 	 * @param port The requested port number.
 	 */
-	public void initSocket(String address, String port)
+	public void initSocket(String address, int port)
 	{
 		try
 		{
@@ -402,7 +402,7 @@ public class ServerNetwork extends Thread{
 		packetData.add("SERVER");
 		try
 		{
-			comm.sendPacket(presAddress, Integer.parseInt(presPort), 
+			comm.sendPacket(presAddress, presPort, 
 					tag, packetData);
 		}
 		catch(IOException ioException)
@@ -463,7 +463,7 @@ public class ServerNetwork extends Thread{
 	 * @param presAddress String address of presentation server.
 	 * @param presPort Port of presentation server.
 	 */
-	public void setPresDetails(String presAddress , String presPort)
+	public void setPresDetails(String presAddress, int presPort)
 	{
 		this.presAddress = presAddress;
 		this.presPort = presPort;
@@ -483,7 +483,7 @@ public class ServerNetwork extends Thread{
 	 * Getter for presentaton server port.
 	 * @return String of port.
 	 */
-	public String getPresPort()
+	public int getPresPort()
 	{
 		return presPort;
 	}
@@ -502,7 +502,7 @@ public class ServerNetwork extends Thread{
     	try
     	{
     		System.out.println("Sending " + header + " to " + presAddress + ":" + presPort);
-    		comm.sendPacket(presAddress, Integer.parseInt(presPort), 
+    		comm.sendPacket(presAddress, presPort, 
     				header, contents);
     	}
     	catch(IOException ioException)

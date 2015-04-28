@@ -27,10 +27,10 @@ public class TCPManager implements CommManager{
 		}
 	}
 	
-	public void initSocket(String address, String port) throws IOException
+	public void initSocket(String address, int port) throws IOException
 	{
 		try {
-			servSocket = new ServerSocket(Integer.parseInt(port));
+			servSocket = new ServerSocket(port);
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid port number.");
 		} catch (IOException e) {
