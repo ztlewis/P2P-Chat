@@ -130,11 +130,17 @@ public class ServerLogin {
 		loginButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt)
 			{
+				int serverPort = 0;
+				int presentationPort = 0;
 				//Check server detail validity.
 				try
 				{
 					InetAddress.getByName(servAddress.getText());
-					Integer.parseInt(servPort.getText());
+					serverPort = Integer.parseInt(servPort.getText());
+					if (serverPort < 0 || serverPort > 65535)
+					{
+						throw new NumberFormatException();
+					}
 				}
 				catch(UnknownHostException uhException)
 				{
@@ -153,7 +159,11 @@ public class ServerLogin {
 				try
 				{
 					InetAddress.getByName(presAddress.getText());
-					Integer.parseInt(presPort.getText());
+					presentationPort = Integer.parseInt(presPort.getText());
+					if (presentationPort < 0 || presentationPort > 65535)
+					{
+						throw new NumberFormatException();
+					}
 				}
 				catch(UnknownHostException uhException)
 				{
