@@ -351,10 +351,6 @@ public class ClientNetwork implements Runnable{
 				dht.addFileName(fileName);
 				dht.receiveFile(fileName, sentAddress, dhtPort);
 			}
-			else if(packetTag.equalsIgnoreCase("DHT_DOWN"))
-			{
-				dht.receiveDownRequest(packetContents);
-			}
 			else if(packetTag.equalsIgnoreCase("DHT_PRED_CHECK"))
 			{
 				List<String> packetData = new ArrayList<String>();
