@@ -136,15 +136,9 @@ public class ServerConnections implements Runnable{
 				for(Peer peer : fullMap.values())
 				{
 					tempCheck = checkList.get(peer.getUsername());
-					//This means that the peer is new and has been added 
-					//while asleep.
-					if(tempCheck == null)
-					{
-						continue;
-					}
 					//Means that the peer is not new and has not responded. 
 					//Dead peer.
-					else if(tempCheck == false)
+					if(tempCheck == false)
 					{
 						model.removePeer(peer.getUsername());
 						console.lifeFail(peer.getUsername(), peer.getAddress(), 
