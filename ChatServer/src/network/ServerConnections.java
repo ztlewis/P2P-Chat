@@ -92,6 +92,7 @@ public class ServerConnections implements Runnable{
 		//Check life of every peer every 30 seconds.
 		while(true)
 		{
+			disconnections = false;
 			checkList.clear();
 		
 			//Recreate check list.
