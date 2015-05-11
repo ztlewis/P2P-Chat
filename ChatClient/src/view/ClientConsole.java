@@ -24,7 +24,7 @@ public class ClientConsole implements Runnable{
     private String message;
     private String userName;
     private String serverIp;
-    private String serverPortNo;
+    private int serverPortNo;
     private String presAddress;
     private String presPort;
     private Scanner scan = new Scanner(System.in);
@@ -40,7 +40,7 @@ public class ClientConsole implements Runnable{
        	System.out.print("Enter server IP: ");
        	serverIp = scan.nextLine();
        	System.out.print("Enter port number: ");
-       	serverPortNo = scan.nextLine();
+       	serverPortNo = scan.nextInt();
         System.out.print("Please enter presentation server address: ");
        	presAddress = scan.nextLine();
        	System.out.print("Please enter presentation server port: ");
