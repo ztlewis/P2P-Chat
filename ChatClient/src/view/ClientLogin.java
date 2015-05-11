@@ -240,8 +240,8 @@ public class ClientLogin{
 				//Check server detail validity.
 				try
 				{
-					InetAddress.getByName(presAddress.getText());
-					serverPort = Integer.parseInt(presPort.getText());
+					InetAddress.getByName(servAddress.getText());
+					serverPort = Integer.parseInt(servPort.getText());
 					if (serverPort < 0 || serverPort > 65535)
 					{
 						throw new NumberFormatException();
@@ -264,8 +264,8 @@ public class ClientLogin{
 				{ 
 					try
 					{	//Check presentation detail validity.
-						InetAddress.getByName(servAddress.getText());
-						presentationPort = Integer.parseInt(servPort.getText());
+						InetAddress.getByName(presAddress.getText());
+						presentationPort = Integer.parseInt(presPort.getText());
 						if (presentationPort < 0 || serverPort > 65535)
 						{
 							throw new NumberFormatException();
