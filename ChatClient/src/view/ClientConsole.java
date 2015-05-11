@@ -23,6 +23,7 @@ public class ClientConsole implements Runnable{
     private String recipientName;
     private String message;
     private String userName;
+    private String password;
     private String serverIp;
     private int serverPortNo;
     private String presAddress;
@@ -48,7 +49,9 @@ public class ClientConsole implements Runnable{
        	model.setPresDetails(presAddress, presPort);
        	System.out.print("Enter user name: ");
        	userName = scan.nextLine();
-       	model.initSession(userName, serverIp, serverPortNo);
+       	System.out.print("Enter password: ");
+       	password = scan.nextLine();
+       	model.initSession(userName, password, serverIp, serverPortNo);
     }
     
     /**

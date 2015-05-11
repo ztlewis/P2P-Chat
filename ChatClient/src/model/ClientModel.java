@@ -28,8 +28,9 @@ public class ClientModel implements Runnable{
 	private ClientLogin login;
 	private boolean serverRegistered;
 	private String username;
+	private String password;
 	private String serverIP;
-	private String serverPort;
+	private int serverPort;
 	private Map<String, Peer> peerList;
 	private boolean dhtStatus = false;
 	private boolean duplicateName = false;
@@ -107,7 +108,7 @@ public class ClientModel implements Runnable{
 	 * @param serverIP The server IP address. 
 	 * @param serverPort The server port. 
 	 */
-	public void setServer(String serverIP, String serverPort)
+	public void setServer(String serverIP, int serverPort)
 	{
 		this.serverIP = serverIP;
 		this.serverPort = serverPort;
@@ -132,10 +133,11 @@ public class ClientModel implements Runnable{
 	 * @param serverIP A String representing the server's IP address.
 	 * @param serverPort The port number of the server.
 	 */
-	public void initSession(String username, String serverIP, 
-			String serverPort)
+	public void initSession(String username, String password, String serverIP, 
+			int serverPort)
 	{
 		this.username = username;
+		this.password = password;
 		this.serverIP = serverIP;
 		this.serverPort = serverPort;
 		
@@ -196,7 +198,7 @@ public class ClientModel implements Runnable{
 	 * Getter for the serverPort variable.
 	 * @return The port number of the server.
 	 */
-	public String getServerPort()
+	public int getServerPort()
 	{
 		return serverPort;
 	}
@@ -216,7 +218,7 @@ public class ClientModel implements Runnable{
 	 */
 	public void registerClient()
 	{
-		network.registerClient(username, serverIP, serverPort);
+		network.registerClient(username, password, serverIP, serverPort);
 	}
 	
 	/**
@@ -225,7 +227,7 @@ public class ClientModel implements Runnable{
 	 */
 	public void deregisterClient()
 	{
-		network.deregisterClient(username, serverIP, serverPort);
+		network.deregisterClient(username, password, serverIP, serverPort);
 	}
 	
 	/**

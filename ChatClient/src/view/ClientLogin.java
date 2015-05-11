@@ -211,6 +211,7 @@ public class ClientLogin{
 			public void actionPerformed(ActionEvent evt)
 			{
 				String _username = username.getText().trim();
+				String _password = password.getText();
 				int serverPort = 0;
 				int presentationPort = 0;
 				
@@ -338,8 +339,8 @@ public class ClientLogin{
 						return;
 					}
 					
-					model.initSession(_username, servAddress.getText(), 
-							servPort.getText());
+					model.initSession(_username, _password, servAddress.getText(), 
+							serverPort);
 					loginButton.setEnabled(false);
 				}
 				new Thread(network).start();

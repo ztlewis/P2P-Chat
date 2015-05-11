@@ -177,18 +177,7 @@ public class ClientNetwork implements Runnable{
 	public void run()
 	{	
 		file.initFile();
-		
-		/*
-		if(!getPresState())
-		{
-			console.request();
-		}
-		else
-		{
-			console.obtainUsername();
-		}
-		*/
-		
+
 		synchronized(this)
 		{
 			runningThread = Thread.currentThread();
@@ -434,18 +423,19 @@ public class ClientNetwork implements Runnable{
 	/**
 	 * Send a registration request for the username with server and login.
 	 * @param username The requested username.
+	 * @param password The password.
 	 * @param serverAddress The address of the chat server.
 	 * @param serverPort The port of the chat server.
 	 */
-	public void registerClient(String username, String serverAddress, 
-			String serverPort)
+	public void registerClient(String username, String password, String serverAddress, 
+			int serverPort)
 	{
 		List<String> packetData = new ArrayList<String>();
-		int length;
 		
 		packetData.add(username);
-		length = addData("REGISTER", packetData,
-				serverAddress, Integer.parseInt(serverPort));
+		packetData.add(password);
+		addData("REGISTER", packetData,
+				serverAddress, serverPort);
 				
 	}
 	
@@ -453,18 +443,19 @@ public class ClientNetwork implements Runnable{
 	 * Send a deregistration notice from the user to the currently connected
 	 * server.
 	 * @param username The username of the client.
+	 * @param password The password.
 	 * @param serverAddress The IP address of the current server.
 	 * @param serverPort The 
 	 */
-	public void deregisterClient(String username, String serverAddress, 
-			String serverPort)
+	public void deregisterClient(String username, String password, String serverAddress, 
+			int serverPort)
 	{
 		List<String> packetData = new ArrayList<String>();
-		int length;
 		
 		packetData.add(username);
-		length = addData("DEREGISTER", packetData,
-				serverAddress, Integer.parseInt(serverPort));
+		packetData.add(password);
+		addData("DEREGISTER", packetData,
+				serverAddress, serverPort);
 	}
 	
 	/**
