@@ -211,6 +211,9 @@ public class ClientLogin{
 			public void actionPerformed(ActionEvent evt)
 			{
 				String _username = username.getText().trim();
+				int serverPort = 0;
+				int presentationPort = 0;
+				
 				if(_username.isEmpty())
 				{
 					JOptionPane.showMessageDialog(null, 
@@ -238,7 +241,11 @@ public class ClientLogin{
 				try
 				{
 					InetAddress.getByName(presAddress.getText());
-					Integer.parseInt(presPort.getText());
+					serverPort = Integer.parseInt(presPort.getText());
+					if (serverPort < 0 || serverPort > 65535)
+					{
+						throw new NumberFormatException();
+					}
 				}
 				catch(UnknownHostException uhException)
 				{
@@ -302,7 +309,11 @@ public class ClientLogin{
 					try
 					{
 						InetAddress.getByName(servAddress.getText());
-						Integer.parseInt(servPort.getText());
+						presentationPort = Integer.parseInt(servPort.getText());
+						if (presentationPort < 0 || serverPort > 65535)
+						{
+							throw new NumberFormatException();
+						}
 					}
 					catch(UnknownHostException uhException)
 					{
