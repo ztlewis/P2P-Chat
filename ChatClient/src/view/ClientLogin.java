@@ -210,8 +210,8 @@ public class ClientLogin{
 		loginButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt)
 			{
-				
-				if(((username.getText()).trim()).isEmpty())
+				String _username = username.getText().trim();
+				if(_username.isEmpty())
 				{
 					JOptionPane.showMessageDialog(null, 
 							"Username empty.");
@@ -317,7 +317,7 @@ public class ClientLogin{
 						return;
 					}
 					
-					model.initSession(username.getText(), servAddress.getText(), 
+					model.initSession(_username, servAddress.getText(), 
 							servPort.getText());
 					loginButton.setEnabled(false);
 				}
