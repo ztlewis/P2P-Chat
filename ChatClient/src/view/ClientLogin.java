@@ -200,6 +200,12 @@ public class ClientLogin{
 		loginButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt)
 			{
+				if(((username.getText()).trim()).isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, 
+							"Username empty.");
+					return;
+				}
 				if(((String)methodCBox.getSelectedItem()).
 						equalsIgnoreCase("UDP"))
 				{
@@ -297,12 +303,6 @@ public class ClientLogin{
 					{
 						JOptionPane.showMessageDialog(null, 
 								"Server port invalid.");
-						return;
-					}
-					if(((username.getText()).trim()).isEmpty())
-					{
-						JOptionPane.showMessageDialog(null, 
-								"Username empty.");
 						return;
 					}
 					

@@ -78,38 +78,8 @@ public class FingerTable {
 	 */
 	public void addNode(int newId, String ip, int port)
 	{
-		int counter;
-		int tempTarget;
-		DHTNode tempNode;
-		DHTNode newNode;
-		
-		//Make the new DHT node object.
-		newNode = new DHTNode(newId, ip, port);
-		
-		//Checking each field in the table.
-		for(counter=0; counter<tabSize; counter++)
-		{
-			//Get target and link information one row.
-			tempTarget = (int)tabData[counter][0];
-			tempNode = (DHTNode)tabData[counter][1];
-			
-			//Normal case where the new target is closer than the
-			//old one. 
-			if(tempNode.getId() >= tempTarget)
-			{
-				if((newId > tempTarget) && (newId < tempNode.getId()))
-				{
-					tabData[counter][1] = newNode;
-				}
-			}
-			else
-			{
-				if((newId > tempTarget) || (newId < tempNode.getId()))
-				{
-					tabData[counter][1] = newNode;
-				}
-			}
-		}
+		DHTNode newNode = new DHTNode(newId, ip, port);
+		addNode(newNode);
 	}
 	
 	/**
