@@ -237,7 +237,7 @@ public class ClientLogin{
 				view.initComm(comm);
 				network.initSocket();
 				
-				//Check presentation detail validity.
+				//Check server detail validity.
 				try
 				{
 					InetAddress.getByName(presAddress.getText());
@@ -261,9 +261,31 @@ public class ClientLogin{
 				}
 				
 				if(presCheckBox.isSelected())
-				{
+				{ 
+					try
+					{	//Check presentation detail validity.
+						InetAddress.getByName(servAddress.getText());
+						presentationPort = Integer.parseInt(servPort.getText());
+						if (presentationPort < 0 || serverPort > 65535)
+						{
+							throw new NumberFormatException();
+						}
+					}
+					catch(UnknownHostException uhException)
+					{
+						JOptionPane.showMessageDialog(null, 
+								"Server address invalid.");
+						return;
+					}
+					catch(NumberFormatException nfException)
+					{
+						JOptionPane.showMessageDialog(null, 
+								"Server port invalid.");
+						return;
+					}
 					network.setPresDetails(presAddress.getText(), presPort.getText());
 				}
+				
 				if(switchCheckBox.isSelected())
 				{
 					model.enableDHT(true);
@@ -302,29 +324,6 @@ public class ClientLogin{
 								network.getClientPort(), false);
 						dht.printDetails();
 					} catch (UnknownHostException e) {
-						return;
-					}
-					
-					//Check server detail validity.
-					try
-					{
-						InetAddress.getByName(servAddress.getText());
-						presentationPort = Integer.parseInt(servPort.getText());
-						if (presentationPort < 0 || serverPort > 65535)
-						{
-							throw new NumberFormatException();
-						}
-					}
-					catch(UnknownHostException uhException)
-					{
-						JOptionPane.showMessageDialog(null, 
-								"Server address invalid.");
-						return;
-					}
-					catch(NumberFormatException nfException)
-					{
-						JOptionPane.showMessageDialog(null, 
-								"Server port invalid.");
 						return;
 					}
 					
