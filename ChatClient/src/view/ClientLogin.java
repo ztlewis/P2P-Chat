@@ -266,7 +266,7 @@ public class ClientLogin{
 					{	//Check presentation detail validity.
 						InetAddress.getByName(presAddress.getText());
 						presentationPort = Integer.parseInt(presPort.getText());
-						if (presentationPort < 0 || serverPort > 65535)
+						if (presentationPort < 0 || presentationPort > 65535)
 						{
 							throw new NumberFormatException();
 						}
@@ -295,11 +295,22 @@ public class ClientLogin{
 							dht.initDHT(network.getClientAddress(), 
 									network.getClientPort(), false);
 							dht.printDetails();
+							
+							int _dhtPort = Integer.parseInt(dhtPort.getText());
+							if (_dhtPort < 0 || _dhtPort > 655355) 
+							{
+								throw new NumberFormatException();
+							}
+							dht.joinNetwork(dhtAddress.getText(), _dhtPort);
 						} catch (UnknownHostException e) {
 							return;
 						}
-						dht.joinNetwork(dhtAddress.getText(), 
-								Integer.parseInt(dhtPort.getText()));
+						catch (NumberFormatException nfException)
+						{
+							JOptionPane.showMessageDialog(null, "DHT server port invalid.");
+							return;
+						}
+
 					}
 					else
 					{
