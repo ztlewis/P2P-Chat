@@ -26,11 +26,13 @@ public class ClientLogin{
 	private JFrame frame;
 	private Container panel;
 	private JTextField username;
+	private JTextField password;
 	private JTextField servAddress;
 	private JTextField servPort;
 	private JTextField presAddress;
 	private JTextField presPort;
 	private JLabel usernameLabel;
+	private JLabel passwordLabel;
 	private JLabel presAddressLabel;
 	private JLabel presPortLabel;
 	private JLabel servAddressLabel;
@@ -40,6 +42,7 @@ public class ClientLogin{
 	private JPanel buttonPanel;
 	private JPanel infoPanel;
 	private JPanel usernamePanel;
+	private JPanel passwordPanel;
 	private JPanel servAddressPanel;
 	private JPanel servPortPanel;
 	private JPanel presAddressPanel;
@@ -80,6 +83,7 @@ public class ClientLogin{
 		frame = new JFrame("P2P Client");
 		panel = frame.getContentPane();
 		username = new JTextField(12);
+		password = new JTextField(12);
 		servAddress = new JTextField("127.0.0.1", 12);
 		servPort = new JTextField("4506", 6);
 		presAddress = new JTextField("127.0.0.1", 12);
@@ -89,11 +93,13 @@ public class ClientLogin{
 		buttonPanel = new JPanel();
 		infoPanel = new JPanel();
 		usernameLabel = new JLabel("Username:");
+		passwordLabel = new JLabel("Password:");
 		servAddressLabel = new JLabel("Server Address:");
 		servPortLabel = new JLabel("Server Port");
 		presAddressLabel = new JLabel("Presentation Address:");
 		presPortLabel = new JLabel("Presentation Port:");
 		usernamePanel = new JPanel();
+		passwordPanel = new JPanel();
 		servAddressPanel = new JPanel();
 		servPortPanel = new JPanel();
 		presAddressPanel = new JPanel();
@@ -123,8 +129,9 @@ public class ClientLogin{
 		
 		//Set the layouts for each panel. 
 		panel.setLayout(new BorderLayout());
-		infoPanel.setLayout(new GridLayout(11,1));
+		infoPanel.setLayout(new GridLayout(12,1));
 		usernamePanel.setLayout(new FlowLayout());
+		passwordPanel.setLayout(new FlowLayout());
 		servAddressPanel.setLayout(new FlowLayout());
 		servPortPanel.setLayout(new FlowLayout());
 		presCheckPanel.setLayout(new FlowLayout());
@@ -141,6 +148,8 @@ public class ClientLogin{
 		methodPanel.add(methodCBox);
 		usernamePanel.add(usernameLabel);
 		usernamePanel.add(username);
+		passwordPanel.add(passwordLabel);
+		passwordPanel.add(password);
 		servAddressPanel.add(servAddressLabel);
 		servAddressPanel.add(servAddress);
 		servPortPanel.add(servPortLabel);
@@ -162,6 +171,7 @@ public class ClientLogin{
 		infoPanel.add(methodPanel);
 		infoPanel.add(switchPanel);
 		infoPanel.add(usernamePanel);
+		infoPanel.add(passwordPanel);
 		infoPanel.add(servAddressPanel);
 		infoPanel.add(servPortPanel);
 		infoPanel.add(presCheckPanel);
@@ -200,6 +210,7 @@ public class ClientLogin{
 		loginButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt)
 			{
+				
 				if(((username.getText()).trim()).isEmpty())
 				{
 					JOptionPane.showMessageDialog(null, 
