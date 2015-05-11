@@ -174,13 +174,7 @@ public class ServerNetwork extends Thread{
 		}
 		
 		file.initFile();
-		
-		/*
-		if(!getPresState())
-		{
-			console.retrievePresDetails();
-		}
-		*/
+
 		new Thread(connection).start();
 		
 		while(isRunning)
@@ -196,6 +190,8 @@ public class ServerNetwork extends Thread{
 		String clientAddress;
 		int clientPort;
 		String clientUsername;
+		String clientPassword;
+		String password;
 		String time;
 		int size;
 		String transTime = null;
@@ -238,11 +234,12 @@ public class ServerNetwork extends Thread{
 		}
 		
 		clientUsername = model.findUsername(clientAddress, clientPort);
+		clientPassword = packetContents.get(1);
 		
 		if(packetTag.equalsIgnoreCase("REGISTER"))
 		{
 			clientUsername = packetContents.get(0);
-			register(clientUsername, clientAddress, clientPort);
+			register(clientUsername, clientPassword, clientAddress, clientPort);
 		}
 		else if(packetTag.equalsIgnoreCase("DEREGISTER"))
 		{
@@ -318,7 +315,7 @@ public class ServerNetwork extends Thread{
 	 * @param clientPort The port of the client.
 	 * @return
 	 */
-	public boolean register(String clientUsername, String clientAddress, 
+	public boolean register(String clientUsername, String clientPassword, String clientAddress, 
 			int clientPort)
 	{
 		Peer newPeer;

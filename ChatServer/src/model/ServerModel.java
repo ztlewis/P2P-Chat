@@ -39,7 +39,7 @@ public class ServerModel {
 	 * @param username The username of the peer that is being deregistered.
 	 */
 	public void removePeer(String username)
-	{
+	{//TODO: use password parameter
 		peerList.remove(username);
 	}
 	
