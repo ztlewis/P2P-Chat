@@ -96,6 +96,11 @@ public class FileManager {
 	/* Stores a username and hashed password into the Map. */
 	public void storeUserAndPassword(String username, String password) {
 		users.put(username, password);
+		try {
+			fWriterPasswords.write(username + ":" + password);
+		} catch (IOException e) {
+			System.out.println("The username and password could not be stored in the passwords file.");
+		}
 	}
 	
 	/**
