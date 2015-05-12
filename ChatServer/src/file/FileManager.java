@@ -1,6 +1,9 @@
 package file;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 import view.*;
@@ -16,6 +19,7 @@ public class FileManager {
 	
 	private FileWriter fWriterLog, fWriterPasswords;
 	private ServerConsole console;
+	private Map<String, String> users = new HashMap<String, String>();
 	
 	/**
 	 * Constructor for FileManager class.
@@ -56,7 +60,10 @@ public class FileManager {
 		}
 	}
 	
-	public void initPasswordsFile() {
+	public void initPasswordsFiles() {
+		List<String> fileContents = new ArrayList<String>();
+		String username, password;
+		
 		File f = new File("passwords.txt");
 		if (!f.exists()) {
 			try {
@@ -65,6 +72,30 @@ public class FileManager {
 				console.printError("Passwords file could not be created");
 			}
 		}
+		try {
+			fileContents = Files.readAllLines(Paths.get(f.getAbsolutePath()), Charset.defaultCharset());
+		} catch (IOException e) {
+			console.printError("Passwords file could not be read from");
+			return;
+		}
+		// Store the usernames and passwords in the Map.
+		for (String s : fileContents) {
+			String[] ids = s.split("");
+			username = ids[0];
+			password = ids[1];
+			users.put(username, password);
+		}
+		console.printMessage("The passwords file was loaded.");
+	}
+	
+	/* Get the password, in hashed form, for a particular user. */
+	public String getPassword(String username) {
+		return users.get(username);
+	}
+	
+	/* Stores a username and hashed password into the Map. */
+	public void storeUserAndPassword(String username, String password) {
+		users.put(username, password);
 	}
 	
 	/**

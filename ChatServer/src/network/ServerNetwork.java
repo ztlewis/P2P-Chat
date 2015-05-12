@@ -4,7 +4,10 @@ import model.*;
 import view.*;
 import file.*;
 import java.io.*;
+import java.math.BigInteger;
 import java.net.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -174,7 +177,7 @@ public class ServerNetwork extends Thread{
 		}
 		
 		file.initLogFile();
-		file.initPasswordsFile();
+		file.initPasswordsFiles();
 
 		new Thread(connection).start();
 		
@@ -309,6 +312,37 @@ public class ServerNetwork extends Thread{
 		}
 	}
 	
+	/** Check if the user has entered the correct password for the username they sent. 
+	 * **/
+	public boolean validateUser(String username, String password) {
+		if (hashPassword(password) == file.getPassword(username)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}	
+	
+	/** Hash a password with SHA-1 and return it. */
+	public String hashPassword(String password) {
+		MessageDigest sha1;
+		String hashedPassword = null;
+		
+		try { // Hash the password with SHA-1, and compare it to the stored password.
+			sha1 = MessageDigest.getInstance("SHA-1");
+			sha1.reset();
+			sha1.update(password.getBytes("UTF-8"));
+			hashedPassword = new BigInteger(1, sha1.digest()).toString(16);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			
+		} catch (NoSuchAlgorithmException e) {
+			console.printError("Message Digest object could not be retrieved.");
+		}
+		return hashedPassword;
+	}
+	
+	
 	/**
 	 * Attempt to register a user that has sent a request.
 	 * @param clientUsername The username of the client.
@@ -324,7 +358,7 @@ public class ServerNetwork extends Thread{
 		int length;
 		
 		console.request(clientUsername, clientAddress, clientPort);
-
+			
 			if(model.usernameAvailable(clientUsername))
 			{
 				length = addData("REGISTRATION_SUCCESS", 
@@ -334,6 +368,11 @@ public class ServerNetwork extends Thread{
 				console.registerPeer(clientUsername, clientAddress, 
 						clientPort);
 				distributePeerLists();
+				// Store the new password for the registered client.
+				if (!clientPassword.isEmpty()) {
+					String hashedPassword = hashPassword(clientPassword);
+					file.storeUserAndPassword(clientUsername, hashedPassword);
+				}
 			}
 			else
 			{
