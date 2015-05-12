@@ -14,7 +14,7 @@ import view.*;
  */
 public class FileManager {
 	
-	private FileWriter fWriter;
+	private FileWriter fWriterLog, fWriterPasswords;
 	private ServerConsole console;
 	
 	/**
@@ -32,26 +32,37 @@ public class FileManager {
 	 * Open the file and check it exists. If not, create it and write
 	 * the columns to the top of the file.
 	 */
-	public void initFile()
+	public void initLogFile()
 	{
 		File f = new File("log.txt");
 		if(!f.exists())
 		{
 			try
 			{
-				fWriter = new FileWriter("log.txt", true);
-				fWriter.append("Time, Tag, Method, Encryption, ");
-				fWriter.append("Source Username, Source Address, " +
+				fWriterLog = new FileWriter("log.txt", true);
+				fWriterLog.append("Time, Tag, Method, Encryption, ");
+				fWriterLog.append("Source Username, Source Address, " +
 						"Source Port, ");
-				fWriter.append("Destination Username, Destination Address, " +
+				fWriterLog.append("Destination Username, Destination Address, " +
 					" Destination Port, ");
-				fWriter.append("Contents, Message Size, Transmission Time\r\n");
-				fWriter.close();
+				fWriterLog.append("Contents, Message Size, Transmission Time\r\n");
+				fWriterLog.close();
 			}
 			catch(IOException existException)
 			{
 				console.printError("Log file could not be created.");
 				
+			}
+		}
+	}
+	
+	public void initPasswordsFile() {
+		File f = new File("passwords.txt");
+		if (!f.exists()) {
+			try {
+				fWriterPasswords = new FileWriter("passwords.txt", true);
+			} catch (IOException e) {
+				console.printError("Passwords file could not be created");
 			}
 		}
 	}
@@ -71,23 +82,23 @@ public class FileManager {
 	 * @param size The size of the message.
 	 * @param transTime The time taken to transmit.
 	 */
-	public void storeMessage(String time, String tag, String method, 
+	public void storeMessageToLogFile(String time, String tag, String method, 
 			String encryption, String sUsername, String sAddress, String sPort,
 			String dUsername,String dAddress, String dPort, 
 			List<String> contents, String size, String transTime)
 	{
 		try
 		{
-			fWriter = new FileWriter("log.txt", true);
-			fWriter.append(time + ", " + tag + ", " + method + ", "
+			fWriterLog = new FileWriter("log.txt", true);
+			fWriterLog.append(time + ", " + tag + ", " + method + ", "
 					+ encryption + ", ");
-			fWriter.append(sUsername + ", " + sAddress + ", " + sPort 
+			fWriterLog.append(sUsername + ", " + sAddress + ", " + sPort 
 					+ ", ");
-			fWriter.append(dUsername + ", " + dAddress + ", " + dPort 
+			fWriterLog.append(dUsername + ", " + dAddress + ", " + dPort 
 					+ ", ");
-			fWriter.append(contents + ", " + size + ", " + transTime +
+			fWriterLog.append(contents + ", " + size + ", " + transTime +
 					"\r\n");
-			fWriter.close();
+			fWriterLog.close();
 		}
 		catch(IOException ioException)
 		{

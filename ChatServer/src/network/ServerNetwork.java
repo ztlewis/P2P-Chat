@@ -173,7 +173,8 @@ public class ServerNetwork extends Thread{
 			System.exit(0);
 		}
 		
-		file.initFile();
+		file.initLogFile();
+		file.initPasswordsFile();
 
 		new Thread(connection).start();
 		
@@ -266,7 +267,7 @@ public class ServerNetwork extends Thread{
 		}
 		
 		
-		file.storeMessage(time, packetTag, method, encryption, 
+		file.storeMessageToLogFile(time, packetTag, method, encryption, 
 				clientUsername, clientAddress, Integer.toString(clientPort)
 				, "SERVER", serverAddress, 
 				Integer.toString(serverPort), 
@@ -448,7 +449,7 @@ public class ServerNetwork extends Thread{
 			console.printError("An error occured while creating the " +
 					"packet.");
 		}
-		file.storeMessage(dateString, packetTag, method, encryption,
+		file.storeMessageToLogFile(dateString, packetTag, method, encryption,
 				"SERVER", serverAddress, Integer.toString(serverPort),
 				model.findUsername(clientAddress, clientPort), clientAddress,
 				Integer.toString(clientPort), packetDupe, Integer.toString(returnVal), "N/A");
