@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
 
-interface CommManager {
+public interface CommManager {
 
     /**
      * Uses default IP and any socket that is available.
