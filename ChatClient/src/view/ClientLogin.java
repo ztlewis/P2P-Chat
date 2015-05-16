@@ -238,14 +238,27 @@ public class ClientLogin {
                     model.enableDHT(true);
                     if (dhtCheckBox.isSelected()) {
                         try {
-                            dht.initDHT(network.getClientAddress(),
-                                    network.getClientPort(), false);
+                            dht.initDHT(network.getClientAddress(), network.getClientPort(), false);
                             dht.printDetails();
                         } catch (UnknownHostException e) {
                             return;
                         }
-                        dht.joinNetwork(dhtAddress.getText(),
-                                Integer.parseInt(dhtPort.getText()));
+
+                        try {
+                            int port = Integer.parseInt(dhtPort.getText());
+                            if (port < 0 || port > 65535)
+                                throw new Exception();
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "invalid port number");
+                            return;
+                        }
+
+                        if (dhtAddress.getText().trim().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "invalid dht address");
+                            return;
+                        }
+
+                        dht.joinNetwork(dhtAddress.getText(), Integer.parseInt(dhtPort.getText()));
                     } else {
                         try {
                             dht.initDHT(network.getClientAddress(),
@@ -262,8 +275,7 @@ public class ClientLogin {
                 } else {
                     model.enableDHT(false);
                     try {
-                        dht.initDHT(network.getClientAddress(),
-                                network.getClientPort(), false);
+                        dht.initDHT(network.getClientAddress(), network.getClientPort(), false);
                         dht.printDetails();
                     } catch (UnknownHostException e) {
                         return;
