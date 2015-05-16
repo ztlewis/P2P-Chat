@@ -64,12 +64,14 @@ public class FileSender implements Runnable{
 		{
 			servSocket.setSoTimeout(10000);
 			Socket newSocket = servSocket.accept();
-			byte[] byteArray = new byte[(int)newFile.length()];
-			BufferedInputStream bufferedInput = 
-					new BufferedInputStream(new FileInputStream(newFile));
+			int fileLength = (int)newFile.length();
+			byte[] byteArray = new byte[fileLength];
+			BufferedInputStream bufferedInput = new BufferedInputStream(new FileInputStream(newFile));
 			
 			bufferedInput.read(byteArray, 0, byteArray.length);
 			OutputStream output = newSocket.getOutputStream();
+			DataOutputStream outputStream = new DataOutputStream(output);
+			outputStream.writeInt(fileLength);
 			output.write(byteArray, 0, byteArray.length);
 			output.flush();
 			newSocket.close();

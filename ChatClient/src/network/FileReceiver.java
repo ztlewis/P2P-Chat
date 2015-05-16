@@ -59,14 +59,16 @@ public class FileReceiver implements Runnable {
             //packets because information order and reliability was not
             //as important.
             Socket recvSocket = new Socket(address, port);
-            byte[] byteArray = new byte[1000000];
             int bytesRead;
             int offset = 0;
 
             InputStream input = recvSocket.getInputStream();
+            DataInputStream inputStream = new DataInputStream(input);
+            int fileLength = inputStream.readInt();
+            byte[] byteArray = new byte[fileLength];
+
             FileOutputStream fileOutput = new FileOutputStream(fileName);
-            BufferedOutputStream bufferedOutput =
-                    new BufferedOutputStream(fileOutput);
+            BufferedOutputStream bufferedOutput = new BufferedOutputStream(fileOutput);
             recvSocket.setSoTimeout(10000);
 
             while ((bytesRead = input.read(byteArray, offset, (byteArray.length - offset))) != -1) {
