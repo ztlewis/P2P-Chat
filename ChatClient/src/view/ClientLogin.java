@@ -252,8 +252,9 @@ public class ClientLogin {
                             JOptionPane.showMessageDialog(null, "invalid port number");
                             return;
                         }
-
-                        if (dhtAddress.getText().trim().isEmpty()) {
+                        try {
+                            InetAddress.getByName(dhtAddress.getText());
+                        } catch (Exception e) {
                             JOptionPane.showMessageDialog(null, "invalid dht address");
                             return;
                         }
