@@ -1,9 +1,5 @@
 package app;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.swing.SwingUtilities;
-
 import dht.*;
 import network.*;
 import view.*;
@@ -12,15 +8,16 @@ import file.*;
 
 /**
  * The driver class that contains the main method and pulls all components together.
+ *
  * @author Alex
  * @version 0.3
  * @since 0.1
  */
 public class ClientApp {
-    
+
     public static void main(String[] args) {
-       
-    	//Initializing each component of the Client Application.
+
+        //Initializing each component of the Client Application.
         ClientNetwork network = new ClientNetwork();
         ClientModel model = new ClientModel();
         ClientConsole console = new ClientConsole();
@@ -28,7 +25,7 @@ public class ClientApp {
         ClientLogin login = new ClientLogin();
         ClientView view = new ClientView();
         DHTNetwork dht = new DHTNetwork();
-        
+
         //Passing references to each other.
         model.initNetwork(network);
         model.initConsole(console);
