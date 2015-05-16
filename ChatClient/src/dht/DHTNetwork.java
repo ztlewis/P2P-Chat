@@ -292,8 +292,7 @@ public class DHTNetwork implements Runnable {
 
         packetData.add(ip);
         packetData.add(Integer.toString(port));
-        network.addData("DHT_JOIN", packetData,
-                destAddress, destPort);
+        network.addData("DHT_JOIN", packetData, destAddress, destPort);
     }
 
     /**
