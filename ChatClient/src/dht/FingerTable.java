@@ -19,7 +19,7 @@ public class FingerTable {
 	private String ip; //Ip of this peer.
 	private int port; //Port of this peer.
 	private int id; //Id of THIS peer.
-	private int tabSize; //Size of table.
+	private int tableSize; //Size of table.
 	Object[][] tabData; //Actual finger table data.
 	
 	//Constructor for finger table. Specify id hash and size of table.
@@ -30,15 +30,15 @@ public class FingerTable {
 	 * @param id
 	 * @param ip
 	 * @param port
-	 * @param tabSize
+	 * @param tableSize
 	 */
-	public FingerTable(int id, String ip, int port, int tabSize)
+	public FingerTable(int id, String ip, int port, int tableSize)
 	{
 		this.ip = ip;
 		this.port = port;
 		this.id = id;
-		this.tabSize = tabSize;
-		tabData = new Object[tabSize][2]; //One field for target and another
+		this.tableSize = tableSize;
+		tabData = new Object[tableSize][2]; // One field for target and another
 		//for the link. The field "i" is the same as the actual index of this
 		//structure.
 		constructTable();
@@ -55,11 +55,11 @@ public class FingerTable {
 		DHTNode self;
 		
 		//The entire ID space.
-		maxIds = (int) Math.pow(2, tabSize-1);
+		maxIds = (int) Math.pow(2, tableSize);
 		self = new DHTNode(id, ip, port);
 		
 		//Creating the target value for each field.
-		for(counter=0; counter<tabSize; counter++)
+		for(counter=0; counter< tableSize; counter++)
 		{
 			tabData[counter][0] = (int)(id + Math.pow(2, counter))%maxIds;
 			tabData[counter][1] = self;
@@ -102,7 +102,7 @@ public class FingerTable {
 		}
 		
 		//Checking each field in the table.
-		for(counter=0; counter<tabSize; counter++)
+		for(counter=0; counter< tableSize; counter++)
 		{
 			//Get target and link information one row.
 			tempTarget = (int)tabData[counter][0];
@@ -138,7 +138,7 @@ public class FingerTable {
 		DHTNode tempNode;
 		
 		//Cycle through and print everything.
-		for(counter=0; counter<tabSize; counter++)
+		for(counter=0; counter< tableSize; counter++)
 		{
 			tempNode = (DHTNode)tabData[counter][1];
 			System.out.println("Number: " + counter + ", Target: " + 
@@ -161,7 +161,7 @@ public class FingerTable {
 		DHTNode tempNode;
 		Integer tempId = null;
 		
-		for(counter=0; counter<tabSize; counter++)
+		for(counter=0; counter< tableSize; counter++)
 		{
 			tempNode = (DHTNode)tabData[counter][1];
 			tempId = (Integer)tabData[counter][0];
@@ -185,7 +185,7 @@ public class FingerTable {
 			targetId = null;
 			//Otherwise, it means they're all larger than the item id. That means 
 			//we need to look for the  node with the largest id.
-			for(counter=0; counter<tabSize; counter++)
+			for(counter=0; counter< tableSize; counter++)
 			{
 				tempId = (Integer)tabData[counter][0];
 				tempNode = (DHTNode)tabData[counter][1];
@@ -215,7 +215,7 @@ public class FingerTable {
 		int counter = 0;
 		DHTNode tempNode;
 		
-		for(counter=0; counter<tabSize; counter++)
+		for(counter=0; counter< tableSize; counter++)
 		{
 			tempNode = (DHTNode)tabData[counter][1];
 			if(tempNode.getId() != prevId)
@@ -239,7 +239,7 @@ public class FingerTable {
 		int counter;
 		DHTNode tempNode;
 		
-		for(counter=0; counter<tabSize; counter++)
+		for(counter=0; counter< tableSize; counter++)
 		{
 			tempNode = (DHTNode)tabData[counter][1];
 			if(tempNode.getId() == oldNode.getId())
@@ -255,11 +255,11 @@ public class FingerTable {
 	 */
 	public String[][] getTableInfo()
 	{
-		String[][] stringTable = new String[tabSize][5];
+		String[][] stringTable = new String[tableSize][5];
 		int counter;
 		DHTNode tempNode;
 		
-		for(counter=0;counter<tabSize;counter++)
+		for(counter=0;counter< tableSize;counter++)
 		{
 			stringTable[counter][0] = Integer.toString(counter);
 			stringTable[counter][1] = Integer.toString((int)tabData[counter][0]);
