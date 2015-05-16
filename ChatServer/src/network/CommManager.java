@@ -5,13 +5,11 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 public interface CommManager {
-	
-	public void initSocket() throws IOException;
-	public void initSocket(String address, int port) throws IOException;
-	public String getServerAddress() throws UnknownHostException;
-	public int getServerPort();
-	public List<String> receivePacket() throws IOException, ClassNotFoundException;
-	public int sendPacket(String rcvAddress, int rcvPort, String header, 
-			List<String> contents) throws IOException;
-	public void clearMsgCache();
+	void initSocket() throws IOException;
+	void initSocket(String address, int port) throws IOException;
+	String getServerAddress() throws UnknownHostException;
+	int getServerPort();
+	List<String> receivePacket() throws IOException, ClassNotFoundException;
+	int sendPacket(String rcvAddress, int rcvPort, String header, List<String> contents) throws IOException;
+	void clearMsgCache();
 }
