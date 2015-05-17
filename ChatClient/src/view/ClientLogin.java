@@ -81,7 +81,7 @@ public class ClientLogin{
 		frame = new JFrame("P2P Client");
 		panel = frame.getContentPane();
 		username = new JTextField(12);
-		password = new JTextField(12);
+		password = new JPasswordField(12);
 		servAddress = new JTextField("127.0.0.1", 12);
 		servPort = new JTextField("4506", 6);
 		presAddress = new JTextField("127.0.0.1", 12);
