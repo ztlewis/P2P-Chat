@@ -1,10 +1,8 @@
 package view;
 
-import java.io.*;
 import java.util.*;
 
 import model.*;
-import network.*;
 
 /**
  * This class deals directly with input and output via the console.

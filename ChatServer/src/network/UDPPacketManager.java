@@ -6,8 +6,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import model.Peer;
-
 /**
  * This class is designed to handle all UDP related procedures for the network.
  * <p>

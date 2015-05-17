@@ -1,7 +1,5 @@
 package dht;
 import java.math.BigInteger;
-import java.nio.charset.Charset;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -16,7 +14,6 @@ import network.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.*;
 import java.net.*;
 
 

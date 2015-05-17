@@ -3,7 +3,6 @@ package network;
 import model.*;
 import view.*;
 
-import java.io.IOException;
 import java.util.*;
 
 /**

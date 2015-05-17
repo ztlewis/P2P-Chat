@@ -63,7 +63,7 @@ public class FileSender implements Runnable{
 		try
 		{
 			servSocket.setSoTimeout(10000);
-			Socket newSocket = servSocket.accept();
+			newSocket = servSocket.accept();
 			byte[] byteArray = new byte[(int)newFile.length()];
 			BufferedInputStream bufferedInput = 
 					new BufferedInputStream(new FileInputStream(newFile));

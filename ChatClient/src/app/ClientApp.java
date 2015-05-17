@@ -1,9 +1,5 @@
 package app;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.swing.SwingUtilities;
-
 import dht.*;
 import network.*;
 import view.*;

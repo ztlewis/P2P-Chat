@@ -195,7 +195,6 @@ public class ServerNetwork extends Thread{
 		int clientPort;
 		String clientUsername;
 		String clientPassword;
-		String password;
 		String time;
 		int size;
 		String transTime = null;

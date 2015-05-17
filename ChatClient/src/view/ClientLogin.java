@@ -22,7 +22,6 @@ import model.*;
 public class ClientLogin{
 	
 	private CommManager comm;
-	private ClientLogin self;
 	private JFrame frame;
 	private Container panel;
 	private JTextField username;
@@ -79,7 +78,6 @@ public class ClientLogin{
 	public ClientLogin ()
 	{
 		//Instantiate all components. 
-		self = this;
 		frame = new JFrame("P2P Client");
 		panel = frame.getContentPane();
 		username = new JTextField(12);
