@@ -355,7 +355,9 @@ public class ClientModel implements Runnable{
 	
 	public void run()
 	{
-		refreshDHTInfo();
+		if (dhtStatus){
+			refreshDHTInfo();
+		}
 	}
 	
 	/**

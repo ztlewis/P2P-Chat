@@ -398,11 +398,12 @@ public class ClientView {
 		else
 		{
 			funcTabs.remove(chatPanel);
+			model.refreshDHTInfo();
+			downFTable.setDefaultRenderer(Object.class, new DHTDownCellRenderer());
+			upFTable.setDefaultRenderer(Object.class, new DHTUpCellRenderer());
 		}
 		
-		model.refreshDHTInfo();
-		downFTable.setDefaultRenderer(Object.class, new DHTDownCellRenderer());
-		upFTable.setDefaultRenderer(Object.class, new DHTUpCellRenderer());
+
 		frame.setVisible(true);
 	}
 	

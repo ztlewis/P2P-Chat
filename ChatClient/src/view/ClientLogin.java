@@ -327,16 +327,7 @@ public class ClientLogin{
 					loginButton.setEnabled(false);
 				}
 				else
-				{
-					model.enableDHT(false);
-					try {
-						dht.initDHT(network.getClientAddress(), 
-								network.getClientPort(), false);
-						dht.printDetails();
-					} catch (UnknownHostException e) {
-						return;
-					}
-					
+				{			
 					model.initSession(_username, _password, servAddress.getText(), 
 							serverPort);
 					loginButton.setEnabled(false);
