@@ -80,7 +80,7 @@ public class FileManager {
 		}
 		// Store the usernames and passwords in the Map.
 		for (String s : fileContents) {
-			String[] ids = s.split("");
+			String[] ids = s.split(":");
 			username = ids[0];
 			password = ids[1];
 			users.put(username, password);
@@ -93,11 +93,13 @@ public class FileManager {
 		return users.get(username);
 	}
 	
-	/* Stores a username and hashed password into the Map. */
+	/* Stores a username and hashed password into the Map, and to the passwords file. */
 	public void storeUserAndPassword(String username, String password) {
 		users.put(username, password);
 		try {
-			fWriterPasswords.write(username + ":" + password);
+			fWriterPasswords = new FileWriter("passwords.txt", true);
+			fWriterPasswords.write(username + ":" + password + "\n");
+			fWriterPasswords.close();
 		} catch (IOException e) {
 			System.out.println("The username and password could not be stored in the passwords file.");
 		}
